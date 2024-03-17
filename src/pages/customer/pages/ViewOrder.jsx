@@ -8,7 +8,7 @@ import { addToCart, underControl } from '../../../redux/userSlice';
 import { BasicButton, GreenButton } from '../../../utils/buttonStyles';
 import { getProductDetails, updateStuff } from '../../../redux/userHandle';
 import Popup from '../../../components/Popup';
-import { generateRandomColor, timeAgo } from '../../../utils/helperFunctions';
+import {generateRandomColor, timeAgo} from '../../../utils/helperFunction'
 
 const ViewOrder = () => {
     const dispatch = useDispatch();

@@ -12,7 +12,7 @@ import { Button } from 'react-scroll';
 
 const AuthenticationPage = ({ mode, role }) => {
 
-    const bgpic = "https://img.freepik.com/free-vector/ecommerce-campaign-concept-illustration_114360-8432.jpg?w=740&t=st=1709807472~exp=1709808072~hmac=6c4ed359ab0a057582f054d5ad0d95d87e42f8ad02c2f2bc2ec4fdbc6c363369"
+    const bgpic = "https://static.vecteezy.com/system/resources/previews/018/841/567/original/local-post-office-2d-isolated-illustration-female-consumer-picking-up-parcel-from-employee-flat-characters-on-cartoon-background-colorful-editable-scene-for-mobile-website-presentation-vector.jpg"
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -32,8 +32,8 @@ const AuthenticationPage = ({ mode, role }) => {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        const email = event.target.email.value;
-        const password = event.target.password.value;
+        const email = event?.target?.email?.value;
+        const password = event?.target?.password?.value;
 
         if (!email || !password) {
             if (!email) setEmailError(true);
@@ -42,7 +42,7 @@ const AuthenticationPage = ({ mode, role }) => {
         }
 
         if (mode === "Register") {
-            const name = event.target.userName.value;
+            const name = event?.target?.userName?.value;
 
             if (!name) {
                 if (!name) setUserNameError(true);
@@ -50,7 +50,7 @@ const AuthenticationPage = ({ mode, role }) => {
             }
 
             if (role === "Seller") {
-                const shopName = event.target.shopName.value;
+                const shopName = event?.target?.shopName?.value;
 
                 if (!shopName) {
                     if (!shopName) setShopNameError(true);
@@ -62,7 +62,6 @@ const AuthenticationPage = ({ mode, role }) => {
             }
             else {
                 const customerFields = { name, email, password, role }
-
                 dispatch(authUser(customerFields, role, mode))
             }
         }
@@ -74,7 +73,7 @@ const AuthenticationPage = ({ mode, role }) => {
     };
 
     const handleInputChange = (event) => {
-        const { name } = event.target;
+        const { name } = event?.target;
         if (name === 'email') setEmailError(false);
         if (name === 'password') setPasswordError(false);
         if (name === 'userName') setUserNameError(false);
@@ -84,14 +83,15 @@ const AuthenticationPage = ({ mode, role }) => {
     useEffect(() => {
         if (status === 'success' && currentRole !== null) {
             navigate('/');
+            setLoader(false);
         }
         else if (status === 'failed') {
-            setMessage(response)
-            setShowPopup(true)
-            setLoader(false)
+            setMessage(response);
+            setShowPopup(true);
+            setLoader(false);
         }
         else if (status === 'error') {
-            setLoader(false)
+            setLoader(false);
             setMessage("Network Error")
             setShowPopup(true)
         }
@@ -99,9 +99,9 @@ const AuthenticationPage = ({ mode, role }) => {
 
 
     const handleDemo=(event)=>{
-        event.preventDefault();
-        const email="sathishmech2k13@gmail.com"
-        const password="1234567890"
+        // event.preventDefault();
+        const email="welcum2nantha@gmail.com"
+        const password="12345678"
         const fields = { email, password }
         dispatch(authUser(fields, role, mode))
     }

@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import jwtDecode from 'jwt-decode';
+import {jwtDecode} from 'jwt-decode';
 
 const initialState = {
     status: 'idle',
@@ -195,7 +195,10 @@ const userSlice = createSlice({
         },
         getError: (state, action) => {
             state.loading = false;
-            state.error = action.payload;
+            // state.error = action.payload;
+              // Extract serializable error information
+      const { message, code } = action.payload;
+      state.error = { message, code }; // Store only serializable data
         },
 
         getDeleteSuccess: (state) => {

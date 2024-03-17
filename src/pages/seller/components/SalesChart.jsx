@@ -1,11 +1,10 @@
 import { alpha, styled } from '@mui/material/styles';
 import { Box, Card, Typography } from '@mui/material';
-
 import { forwardRef } from 'react';
-import { Icon } from '@iconify/react';
+import {Icon} from '@iconify/react';
 import CountUp from 'react-countup';
 
-const SalesCard = ({ title, total, color, icon }) => {
+const SalesCard = ({ title, total, color = 'primary', icon }) => {
     return (
         <Card
             sx={{

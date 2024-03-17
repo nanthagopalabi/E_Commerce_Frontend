@@ -11,7 +11,7 @@ const AccountMenu = () => {
 
     const { currentUser } = useSelector(state => state.user);
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -32,7 +32,7 @@ const AccountMenu = () => {
                         aria-expanded={open ? 'true' : undefined}
                     >
                         <Avatar sx={{ width: 32, height: 32, backgroundColor: "#8970dc" }}>
-                            {String(currentUser.name).charAt(0)}
+                            {String(currentUser?.name).charAt(0)}
                         </Avatar>
                     </IconButton>
                 </Tooltip>
@@ -70,18 +70,18 @@ const AccountMenu = () => {
     );
 }
 
-export default AccountMenu
+export default AccountMenu;
 
 const styles = {
     styledPaper: {
         overflow: 'visible',
         filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
-        mt: 1.5,
+        marginTop: 1.5,
         '& .MuiAvatar-root': {
             width: 32,
             height: 32,
-            ml: -0.5,
-            mr: 1,
+            marginLeft: -0.5,
+            marginRight: 1,
         },
         '&:before': {
             content: '""',
@@ -91,9 +91,9 @@ const styles = {
             right: 14,
             width: 10,
             height: 10,
-            bgcolor: 'background.paper',
+            backgroundColor: 'background.paper',
             transform: 'translateY(-50%) rotate(45deg)',
             zIndex: 0,
         },
     }
-}
+};

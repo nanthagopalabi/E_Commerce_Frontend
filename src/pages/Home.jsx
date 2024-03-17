@@ -9,25 +9,22 @@ import { NewtonsCradle } from '@uiball/loaders';
 import { Link } from 'react-router-dom';
 
 const Home = () => {
-  const adURL =
-    'https://rukminim1.flixcart.com/flap/464/708/image/1f03e99f6dc9f7a6.jpg?q=70';
+  const adURL ='https://rukminim1.flixcart.com/flap/464/708/image/1f03e99f6dc9f7a6.jpg?q=70';
 
   const dispatch = useDispatch();
-
   const { productData, responseProducts, error } = useSelector((state) => state.user);
-
   const [showNetworkError, setShowNetworkError] = useState(false);
   const itemData = [
     {
-      img: 'https://rukminim1.flixcart.com/fk-p-flap/520/280/image/ec6cf773ae886bd7.jpg?q=20',
+      img: 'https://img.freepik.com/premium-vector/realistic-super-sale1-212-advertising-social-media-promotion_554907-310.jpg?w=826',
       title: 'Kitchen Appliance',
     },
     {
-      img: 'https://rukminim1.flixcart.com/fk-p-flap/520/280/image/22e305bf45e2e1a2.jpeg?q=20',
+      img: 'https://img.freepik.com/free-vector/promotion-fashion-banner_1188-213.jpg?w=740&t=st=1710665281~exp=1710665881~hmac=ebea750c38661beec21e4b04acd7553c6ba5500cce5e1ce22e433c6c74666e52',
       title: 'Clothing ',
     },
     {
-      img: 'https://rukminim1.flixcart.com/fk-p-flap/520/280/image/c3146ff3077e7744.jpg?q=20',
+      img: 'https://as1.ftcdn.net/v2/jpg/02/23/69/52/1000_F_223695299_itiCzqOMDKZD5D9qXb2jcgfDGKVQIt2r.jpg',
       title: 'Haircare',
     },
     
@@ -67,20 +64,20 @@ const Home = () => {
 
       {showNetworkError ? (
         <StyledContainer>
-          <h1>Sorry, network error.</h1>
+          <h1>Sorry, Network Error.</h1>
         </StyledContainer>
       ) : error ? (
         <StyledContainer>
-          <h1>Please Wait A Second</h1>
+          <h1>Please Wait a Second</h1>
           <NewtonsCradle size={70} speed={1.4} color="black" />
         </StyledContainer>
       ) : (
         <>
           {responseProducts ? (
             <>
-              <StyledContainer>No products found right now</StyledContainer>
+              <StyledContainer>No products Found right now</StyledContainer>
               <StyledContainer>
-                Become a seller to add products
+                Become a seller to Add products
                 <Link to={"/Sellerregister"}>
                   Join
                 </Link>

@@ -1,5 +1,4 @@
 import { Divider, Box, Typography, Button, styled, Container, ImageList, ImageListItem } from '@mui/material';
-
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Carousel from 'react-multi-carousel';
 import "react-multi-carousel/lib/styles.css";
@@ -7,8 +6,7 @@ import "react-multi-carousel/lib/styles.css";
 const Slide = ({ products, title }) => {
     const navigate = useNavigate()
     const location = useLocation();
-      
-   
+         
     return (
         <Component>
             <Deal>
@@ -41,14 +39,14 @@ const Slide = ({ products, title }) => {
                     products.map((product, index) => (
                         <Link key={index} to={`/product/view/${product._id}`} style={{ textDecoration: 'none' }}>
                             <Box textAlign="center" style={{ padding: '25px 15px' }}>
-                                <Image src={product.productImage} />
-                                <TitleText style={{ fontWeight: 600, color: '#212121' }}>{product.productName}</TitleText>
+                                <Image src={product?.productImage} />
+                                <TitleText style={{ fontWeight: 600, color: '#212121' }}>{product?.productName}</TitleText>
                                 <TextContainer>
-                                    <Text style={{ color: '#525050', textDecoration: "line-through" }}>{product.price.mrp}</Text>
-                                    <Text>₹{product.price.cost}</Text>
-                                    <Text style={{ color: 'green' }}>{product.price.discountPercent}% off</Text>
+                                    <Text style={{ color: '#525050', textDecoration: "line-through" }}>{product?.price?.mrp}</Text>
+                                    <Text>₹{product?.price?.cost}</Text>
+                                    <Text style={{ color: 'green' }}>{product?.price?.discountPercent}% off</Text>
                                 </TextContainer>
-                                <Text style={{ color: '#212121', opacity: '.6' }}>{product.tagline}</Text>
+                                <Text style={{ color: '#212121', opacity: '.6' }}>{product?.tagline}</Text>
                             </Box>
                         </Link>
                     ))

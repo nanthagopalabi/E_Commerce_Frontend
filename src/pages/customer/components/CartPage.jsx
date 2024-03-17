@@ -1,6 +1,6 @@
-import React from 'react'
-import Cart from './Cart'
-import { useNavigate } from 'react-router-dom'
+import React from 'react';
+import Cart from './Cart';
+import { useNavigate } from 'react-router-dom';
 
 function CartPage() {
 

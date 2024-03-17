@@ -1,13 +1,5 @@
 import { useState } from 'react';
-import {
-    CssBaseline,
-    Box,
-    Toolbar,
-    List,
-    Typography,
-    Divider,
-    IconButton,
-} from '@mui/material';
+import {CssBaseline,Box,Toolbar,List,Typography,Divider,IconButton,} from '@mui/material';
 import ListIcon from '@mui/icons-material/List';
 import CloseIcon from '@mui/icons-material/Close';
 import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
@@ -16,9 +8,8 @@ import LocalMallIcon from '@mui/icons-material/LocalMall';
 import Logout from '../Logout';
 import SideBar from './components/SideBar';
 import SellerHomePage from './pages/SellerHomePage';
-
 import AccountMenu from './components/AccountMenu';
-import ShowProducts from './pages/ShowProducts';
+import ShowProducts from './pages/ShowProduct';
 import ShowOrders from './pages/ShowOrders';
 import ViewProductSeller from './pages/ViewProductSeller';
 import AddProduct from './pages/AddProduct';

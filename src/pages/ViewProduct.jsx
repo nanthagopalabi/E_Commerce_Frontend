@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import { BasicButton } from '../utils/buttonStyles';
 import { getProductDetails, updateStuff } from '../redux/userHandle';
 import { Avatar, Card, IconButton, Menu, MenuItem, Typography } from '@mui/material';
-import { generateRandomColor, timeAgo } from '../utils/helperFunctions';
+import { generateRandomColor, timeAgo } from '../utils/helperFunction';
 import { MoreVert } from '@mui/icons-material';
 
 const ViewProduct = () => {
@@ -52,18 +52,18 @@ const ViewProduct = () => {
                             :
                             <>
                                 <ProductContainer>
-                                    <ProductImage src={productDetails && productDetails.productImage} alt={productDetails && productDetails.productName} />
+                                    <ProductImage src={productDetails && productDetails?.productImage} alt={productDetails && productDetails?.productName} />
                                     <ProductInfo>
-                                        <ProductName>{productDetails && productDetails.productName}</ProductName>
+                                        <ProductName>{productDetails && productDetails?.productName}</ProductName>
                                         <PriceContainer>
-                                            <PriceCost>₹{productDetails && productDetails.price && productDetails.price.cost}</PriceCost>
-                                            <PriceMrp>₹{productDetails && productDetails.price && productDetails.price.mrp}</PriceMrp>
-                                            <PriceDiscount>{productDetails && productDetails.price && productDetails.price.discountPercent}% off</PriceDiscount>
+                                            <PriceCost>₹{productDetails && productDetails?.price && productDetails?.price.cost}</PriceCost>
+                                            <PriceMrp>₹{productDetails && productDetails?.price && productDetails?.price.mrp}</PriceMrp>
+                                            <PriceDiscount>{productDetails && productDetails?.price && productDetails?.price.discountPercent}% off</PriceDiscount>
                                         </PriceContainer>
-                                        <Description>{productDetails && productDetails.description}</Description>
+                                        <Description>{productDetails && productDetails?.description}</Description>
                                         <ProductDetails>
-                                            <p>Category: {productDetails && productDetails.category}</p>
-                                            <p>Subcategory: {productDetails && productDetails.subcategory}</p>
+                                            <p>Category: {productDetails && productDetails?.category}</p>
+                                            <p>Subcategory: {productDetails && productDetails?.subcategory}</p>
                                         </ProductDetails>
                                     </ProductInfo>
                                 </ProductContainer>

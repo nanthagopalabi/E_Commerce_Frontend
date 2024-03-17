@@ -1,6 +1,5 @@
 import { alpha, styled } from '@mui/material/styles';
 import { Box, Card, Typography } from '@mui/material';
-
 import { forwardRef } from 'react';
 import { Icon } from '@iconify/react';
 import CountUp from 'react-countup';

@@ -272,9 +272,9 @@ export const productDataList = [
   ];
   
   export const bannerData = [
-    { _id: 1, url: 'https://rukminim2.flixcart.com/fk-p-flap/1600/270/image/bf66a7008bf9f265.png?q=20' },
+    { _id: 1, url: 'https://static-assets-web.flixcart.com/fk-sp-static/images/prelogin/images/group_1000001232_2.webp' },
     { _id: 2, url: 'https://rukminim2.flixcart.com/fk-p-flap/1600/270/image/1ecaaf3de245472b.jpg?q=20' },
-    { _id: 3, url: 'https://rukminim2.flixcart.com/fk-p-flap/1600/270/image/34aa7d4cbf9586cc.jpg?q=20' },
-    { _id: 4, url: 'https://rukminim2.flixcart.com/fk-p-flap/1600/270/image/bf66a7008bf9f265.png?q=20' },
-    { _id: 5, url: 'https://rukminim2.flixcart.com/fk-p-flap/1600/270/image/78afea2ce25ec4db.jpg?q=20' },
+    { _id: 3, url: 'https://rukminim2.flixcart.com/fk-p-flap/1600/270/image/68959fd7d83448b8.png?q=20' },
+    { _id: 4, url: 'https://rukminim2.flixcart.com/fk-p-flap/1600/270/image/67bdb22c1fd23512.jpg?q=20' },
+    { _id: 5, url: 'https://rukminim2.flixcart.com/fk-p-flap/1600/270/image/5ecf4f27ed5376ef.jpg?q=20' },
   ]

@@ -1,4 +1,3 @@
-
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -14,22 +13,23 @@ import MenuItem from '@mui/material/MenuItem';
 import LocalMallIcon from '@mui/icons-material/LocalMall';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Login, Logout, Shop2, Store } from '@mui/icons-material';
-
 import { Link, useNavigate } from 'react-router-dom';
 import { Avatar, Badge, Divider, Drawer, ListItemIcon } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import { styled } from 'styled-components';
+// import { styled } from '@mui/system';
 import { NavLogo } from '../utils/styles';
-
 import Cart from './customer/components/Cart';
 import Search from './customer/components/Search';
 import ProductsMenu from './customer/components/ProductsMenu';
 import { updateCustomer } from '../redux/userHandle';
+import styled from 'styled-components';
+import { Paper } from '@mui/material';
+
 
 const Navbar = () => {
     const { currentUser, currentRole } = useSelector(state => state.user);
 
-    const totalQuantity = currentUser && currentUser.cartDetails && currentUser.cartDetails.reduce((total, item) => total + item.quantity, 0);
+    const totalQuantity = currentUser && currentUser?.cartDetails && currentUser?.cartDetails.reduce((total, item) => total + item?.quantity, 0);
 
     const navigate = useNavigate()
     const dispatch = useDispatch();
@@ -61,16 +61,16 @@ const Navbar = () => {
 
     // Navigation Menu
     const handleOpenNavMenu = (event) => {
-        setAnchorElNav(event.currentTarget);
+        setAnchorElNav(event?.currentTarget);
     };
 
-    const handleCloseNavMenu = () => {
-        setAnchorElNav(null);
-    };
+    // const handleCloseNavMenu = () => {
+    //     setAnchorElNav(null);
+    // };
 
     // User Menu
     const handleOpenUserMenu = (event) => {
-        setAnchorElUser(event.currentTarget);
+        setAnchorElUser(event?.currentTarget);
     };
 
     const handleCloseUserMenu = () => {
@@ -79,7 +79,7 @@ const Navbar = () => {
 
     // Signin Menu
     const handleOpenSigninMenu = (event) => {
-        setAnchorElSign(event.currentTarget);
+        setAnchorElSign(event?.currentTarget);
     };
 
     const handleCloseSigninMenu = () => {
@@ -87,12 +87,12 @@ const Navbar = () => {
     };
 
     const homeHandler = () => {
-        navigate("/")
+        navigate("/Home")
     };
 
     return (
         <AppBar position="sticky">
-            <Container maxWidth="xl"   sx={{ backgroundColor: "#2874f0" }}>
+            <Container maxWidth="xl" sx={{ backgroundColor: "#e06666" }}>
                 <Toolbar disableGutters>
 
                     {/* MOBILE */}
@@ -134,7 +134,7 @@ const Navbar = () => {
                                 duration={500}
                                 onClick={homeHandler}
                             >
-                                E-Cart
+                                SmartCart
                             </NavLogo>
                         </Typography>
                     </HomeContainer>
@@ -153,35 +153,29 @@ const Navbar = () => {
                                     <Login />
                                 </IconButton>
                                 <Menu
+                                    anchorEl={anchorElSign}
                                     id="menu-appbar"
-                                    anchorEl={anchorElNav}
-                                    anchorOrigin={{
-                                        vertical: 'bottom',
-                                        horizontal: 'left',
-                                    }}
-                                    keepMounted
-                                    transformOrigin={{
-                                        vertical: 'top',
-                                        horizontal: 'left',
-                                    }}
-                                    open={Boolean(anchorElNav)}
-                                    onClose={handleCloseNavMenu}
-                                    onClick={handleCloseUserMenu}
-                                    sx={{
-                                        display: { xs: 'block', md: 'none' },
-                                    }}
+                                    open={openSign}
+                                    onClose={handleCloseSigninMenu}
+                                    onClick={handleCloseSigninMenu}
+                                    PaperComponent={StyledPaper} // Use PaperComponent instead of PaperProps
+                                    transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+                                    anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
                                 >
-                                    <MenuItem onClick={() => {
-                                        navigate("/Customerlogin")
-                                        handleCloseNavMenu()
-                                    }}>
-                                        <Typography textAlign="center">Sign in as customer</Typography>
+                                    <MenuItem onClick={() => navigate("/Customerlogin")}>
+                                        <Avatar />
+                                        <Link to="/Customerlogin">
+                                            Sign in as customer
+                                        </Link>
                                     </MenuItem>
-                                    <MenuItem onClick={() => {
-                                        navigate("/Sellerlogin")
-                                        handleCloseNavMenu()
-                                    }}>
-                                        <Typography textAlign="center">Sign in as seller</Typography>
+                                    <Divider />
+                                    <MenuItem onClick={() => navigate("/Sellerlogin")}>
+                                        <ListItemIcon>
+                                            <Store fontSize="small" />
+                                        </ListItemIcon>
+                                        <Link to="/Sellerlogin">
+                                            Sign in as seller
+                                        </Link>
                                     </MenuItem>
                                 </Menu>
                             </>
@@ -215,7 +209,7 @@ const Navbar = () => {
                             >
                                 <LocalMallIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
 
-                                E-cart
+                                SmartCart
                             </NavLogo>
                         </Typography>
                     </HomeContainer>
@@ -242,13 +236,11 @@ const Navbar = () => {
                                 open={openSign}
                                 onClose={handleCloseSigninMenu}
                                 onClick={handleCloseSigninMenu}
-                                PaperProps={{
-                                    elevation: 0,
-                                    sx: styles.styledPaper,
-                                }}
+                                PaperComponent={StyledPaper} // Use PaperComponent instead of PaperProps
                                 transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
-                            >
+                                >
+
                                 <MenuItem onClick={() => navigate("/Customerlogin")}>
                                     <Avatar />
                                     <Link to="/Customerlogin">
@@ -293,19 +285,16 @@ const Navbar = () => {
                                     </Avatar>
                                 </IconButton>
                             </Tooltip>
-                            <Menu
+                           <Menu
                                 anchorEl={anchorElUser}
                                 id="menu-appbar"
                                 open={open}
                                 onClose={handleCloseUserMenu}
                                 onClick={handleCloseUserMenu}
-                                PaperProps={{
-                                    elevation: 0,
-                                    sx: styles.styledPaper,
-                                }}
+                                PaperComponent={StyledPaper} // Use PaperComponent instead of PaperProps
                                 transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
-                            >
+                                >
                                 <MenuItem onClick={() => navigate("/Profile")}>
                                     <Avatar />
                                     <Link to="/Profile">
@@ -363,31 +352,29 @@ export default Navbar;
 
 const HomeContainer = styled.div`
   display: flex;
-  cursor:pointer;
+  cursor: pointer;
 `;
 
-const styles = {
-    styledPaper: {
-        overflow: 'visible',
-        filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
-        mt: 1.5,
-        '& .MuiAvatar-root': {
-            width: 32,
-            height: 32,
-            ml: -0.5,
-            mr: 1,
-        },
-        '&:before': {
-            content: '""',
-            display: 'block',
-            position: 'absolute',
-            top: 0,
-            right: 14,
-            width: 10,
-            height: 10,
-            bgcolor: 'background.paper',
-            transform: 'translateY(-50%) rotate(45deg)',
-            zIndex: 0,
-        },
-    }
-}
+const StyledPaper = styled(Paper)({
+    overflow: 'visible',
+    filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+    marginTop: 1.5,
+    '& .MuiAvatar-root': {
+        width: 32,
+        height: 32,
+        marginLeft: -0.5,
+        marginRight: 1,
+    },
+    '&:before': {
+        content: '""',
+        display: 'block',
+        position: 'absolute',
+        top: 0,
+        right: 14,
+        width: 10,
+        height: 10,
+        backgroundColor: 'background.paper', // Note: 'bgcolor' should be 'backgroundColor'
+        transform: 'translateY(-50%) rotate(45deg)',
+        zIndex: 0,
+    },
+});

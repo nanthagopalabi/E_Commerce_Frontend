@@ -5,7 +5,6 @@ import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import Typography from '@mui/material/Typography';
-
 import ShippingPage from '../components/ShippingPage';
 import PaymentForm from '../components/PaymentForm';
 import OrderSummary from '../components/OrderSummary';

@@ -8,7 +8,7 @@ import { Delete, KeyboardArrowDown, KeyboardArrowUp } from '@mui/icons-material'
 import { Avatar, Box, Card, CircularProgress, Collapse, IconButton, Stack, TextField, Typography } from '@mui/material';
 import altImage from "../../../assets/altimg.png";
 import Popup from '../../../components/Popup';
-import { generateRandomColor, timeAgo } from '../../../utils/helperFunctions';
+import { generateRandomColor, timeAgo } from '../../../utils/helperFunction'
 import { underControl } from '../../../redux/userSlice';
 import AlertDialogSlide from '../../../components/AlertDialogSlide';
 

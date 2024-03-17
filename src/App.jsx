@@ -1,20 +1,20 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import Home from './pages/Home'
-import ViewProduct from './pages/ViewProduct'
-import Navbar from './pages/Navbar'
-import AuthenticationPage from './pages/AuthenticationPage'
-import SellerDashboard from './pages/seller/SellerDashboard'
-import CustomerSearch from './pages/customer/pages/CustomerSearch'
-import Products from './components/Products';
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 import { getProducts } from './redux/userHandle';
+import { isTokenValid } from './redux/userSlice';
+import Navbar from './pages/Navbar';
+import Home from './pages/Home';
+import ViewProduct from './pages/ViewProduct';
+import Products from './components/Products';
+import AuthenticationPage from './pages/AuthenticationPage';
+import SellerDashboard from './pages/seller/SellerDashboard';
+import CustomerSearch from './pages/customer/pages/CustomerSearch';
 import CustomerOrders from './pages/customer/pages/CustomerOrders';
 import CheckoutSteps from './pages/customer/pages/CheckoutSteps';
 import Profile from './pages/customer/pages/Profile';
 import Logout from './pages/Logout';
-import { isTokenValid } from './redux/userSlice';
-import CheckoutAftermath from './pages/customer/pages/CheckoutAftermath';
+import CheckoutAftermath from './pages/customer/pages/CheckourAftermath';
 import ViewOrder from './pages/customer/pages/ViewOrder';
 import CartPage from './pages/customer/components/CartPage';
 
