@@ -11,20 +11,20 @@ const SalesCard = ({ title, total, color = 'primary', icon }) => {
                 py: 5,
                 boxShadow: 0,
                 textAlign: 'center',
-                color: (theme) => theme.palette[color].darker,
+                color: (theme) => theme?.palette[color]?.darker,
                 backgroundImage: (theme) =>
-                    `linear-gradient(135deg, ${alpha(theme.palette[color].dark, 0)} 0%, ${alpha(
-                        theme.palette[color].dark,
+                    `linear-gradient(135deg, ${alpha(theme?.palette[color]?.dark, 0)} 0%, ${alpha(
+                        theme?.palette[color]?.dark,
                         0.24
                     )} 100%)`,
             }}
         >
             <StyledIcon
                 sx={{
-                    color: (theme) => theme.palette[color].dark,
+                    color: (theme) => theme?.palette[color]?.dark,
                     backgroundImage: (theme) =>
-                        `linear-gradient(135deg, ${alpha(theme.palette[color].dark, 0)} 0%, ${alpha(
-                            theme.palette[color].dark,
+                        `linear-gradient(135deg, ${alpha(theme?.palette[color]?.dark, 0)} 0%, ${alpha(
+                            theme?.palette[color]?.dark,
                             0.24
                         )} 100%)`,
                 }}
@@ -61,8 +61,8 @@ const StyledIcon = styled('div')(({ theme }) => ({
     display: 'flex',
     borderRadius: '50%',
     alignItems: 'center',
-    width: theme.spacing(8),
-    height: theme.spacing(8),
+    width: theme?.spacing(8),
+    height: theme?.spacing(8),
     justifyContent: 'center',
-    marginBottom: theme.spacing(3),
+    marginBottom: theme?.spacing(3),
 }));

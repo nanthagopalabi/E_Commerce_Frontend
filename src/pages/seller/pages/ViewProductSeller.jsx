@@ -48,18 +48,18 @@ const ViewProductSeller = () => {
 
   useEffect(() => {
     if (productDetails) {
-      setProductName(productDetails.productName || '');
-      setPrice(productDetails.price || '');
-      setSubcategory(productDetails.subcategory || '');
-      setProductImage(productDetails.productImage || '');
-      setCategory(productDetails.category || '');
-      setDescription(productDetails.description || "");
-      setTagline(productDetails.tagline || "");
+      setProductName(productDetails?.productName || '');
+      setPrice(productDetails?.price || '');
+      setSubcategory(productDetails?.subcategory || '');
+      setProductImage(productDetails?.productImage || '');
+      setCategory(productDetails?.category || '');
+      setDescription(productDetails?.description || "");
+      setTagline(productDetails?.tagline || "");
     }
-    if (productDetails.price) {
-      setMrp(productDetails.price.mrp || '');
-      setCost(productDetails.price.cost || '');
-      setDiscountPercent(productDetails.price.discountPercent || '');
+    if (productDetails?.price) {
+      setMrp(productDetails?.price?.mrp || '');
+      setCost(productDetails?.price?.cost || '');
+      setDiscountPercent(productDetails?.price?.discountPercent || '');
     }
   }, [productDetails]);
 
@@ -122,18 +122,18 @@ const ViewProductSeller = () => {
               :
               <>
                 <ProductContainer>
-                  <ProductImage src={productDetails && productDetails.productImage} alt={productDetails && productDetails.productName} />
+                  <ProductImage src={productDetails && productDetails?.productImage} alt={productDetails && productDetails?.productName} />
                   <ProductInfo>
-                    <ProductName>{productDetails && productDetails.productName}</ProductName>
+                    <ProductName>{productDetails && productDetails?.productName}</ProductName>
                     <PriceContainer>
-                      <PriceCost>₹{productDetails && productDetails.price && productDetails.price.cost}</PriceCost>
-                      <PriceMrp>₹{productDetails && productDetails.price && productDetails.price.mrp}</PriceMrp>
-                      <PriceDiscount>{productDetails && productDetails.price && productDetails.price.discountPercent}% off</PriceDiscount>
+                      <PriceCost>₹{productDetails && productDetails?.price && productDetails?.price?.cost}</PriceCost>
+                      <PriceMrp>₹{productDetails && productDetails?.price && productDetails?.price?.mrp}</PriceMrp>
+                      <PriceDiscount>{productDetails && productDetails?.price && productDetails?.price?.discountPercent}% off</PriceDiscount>
                     </PriceContainer>
-                    <Description>{productDetails && productDetails.description}</Description>
+                    <Description>{productDetails && productDetails?.description}</Description>
                     <ProductDetails>
-                      <p>Category: {productDetails && productDetails.category}</p>
-                      <p>Subcategory: {productDetails && productDetails.subcategory}</p>
+                      <p>Category: {productDetails && productDetails?.category}</p>
+                      <p>Subcategory: {productDetails && productDetails?.subcategory}</p>
                     </ProductDetails>
                   </ProductInfo>
                 </ProductContainer>
@@ -177,7 +177,7 @@ const ViewProductSeller = () => {
                               fullWidth
                               label="Product Image URL"
                               value={productImage}
-                              onChange={(event) => setProductImage(event.target.value)}
+                              onChange={(event) => setProductImage(event?.target?.value)}
                               required
                               InputLabelProps={{
                                 shrink: true,
@@ -187,7 +187,7 @@ const ViewProductSeller = () => {
                               fullWidth
                               label="Product Name"
                               value={productName}
-                              onChange={(event) => setProductName(event.target.value)}
+                              onChange={(event) => setProductName(event?.target?.value)}
                               required
                               InputLabelProps={{
                                 shrink: true,
@@ -198,7 +198,7 @@ const ViewProductSeller = () => {
                               multiline
                               label="Description"
                               value={description}
-                              onChange={(event) => setDescription(event.target.value)}
+                              onChange={(event) => setDescription(event?.target?.value)}
                               required
                               InputLabelProps={{
                                 shrink: true,
@@ -208,7 +208,7 @@ const ViewProductSeller = () => {
                               fullWidth
                               label="MRP"
                               value={mrp}
-                              onChange={(event) => setMrp(event.target.value)}
+                              onChange={(event) => setMrp(event?.target?.value)}
                               required
                               InputLabelProps={{
                                 shrink: true,
@@ -218,7 +218,7 @@ const ViewProductSeller = () => {
                               fullWidth
                               label="Cost"
                               value={cost}
-                              onChange={(event) => setCost(event.target.value)}
+                              onChange={(event) => setCost(event?.target?.value)}
                               required
                               InputLabelProps={{
                                 shrink: true,
@@ -228,7 +228,7 @@ const ViewProductSeller = () => {
                               fullWidth
                               label="Discount Percent"
                               value={discountPercent}
-                              onChange={(event) => setDiscountPercent(event.target.value)}
+                              onChange={(event) => setDiscountPercent(event?.target?.value)}
                               required
                               InputLabelProps={{
                                 shrink: true,
@@ -238,7 +238,7 @@ const ViewProductSeller = () => {
                               fullWidth
                               label="Category"
                               value={category}
-                              onChange={(event) => setCategory(event.target.value)}
+                              onChange={(event) => setCategory(event?.target?.value)}
                               required
                               InputLabelProps={{
                                 shrink: true,
@@ -248,7 +248,7 @@ const ViewProductSeller = () => {
                               fullWidth
                               label="Subcategory"
                               value={subcategory}
-                              onChange={(event) => setSubcategory(event.target.value)}
+                              onChange={(event) => setSubcategory(event?.target?.value)}
                               required
                               InputLabelProps={{
                                 shrink: true,
@@ -258,7 +258,7 @@ const ViewProductSeller = () => {
                               fullWidth
                               label="Tagline"
                               value={tagline}
-                              onChange={(event) => setTagline(event.target.value)}
+                              onChange={(event) => setTagline(event?.target?.value)}
                               required
                               InputLabelProps={{
                                 shrink: true,
@@ -284,7 +284,7 @@ const ViewProductSeller = () => {
                 <ReviewWritingContainer>
                   <Typography variant="h4">Reviews</Typography>
 
-                  {productDetails.reviews && productDetails.reviews.length > 0 &&
+                  {productDetails?.reviews && productDetails?.reviews?.length > 0 &&
                     <DarkRedButton onClick={() => {
                       setDialog("Do you want to delete all notices ?")
                       setShowDialog(true)
@@ -293,24 +293,24 @@ const ViewProductSeller = () => {
                     </DarkRedButton>}
                 </ReviewWritingContainer>
 
-                {productDetails.reviews && productDetails.reviews.length > 0 ? (
+                {productDetails?.reviews && productDetails?.reviews?.length > 0 ? (
                   <ReviewContainer>
-                    {productDetails.reviews.map((review, index) => (
+                    {productDetails?.reviews.map((review, index) => (
                       <ReviewCard key={index}>
                         <ReviewCardDivision>
                           <Avatar sx={{ width: "60px", height: "60px", marginRight: "1rem", backgroundColor: generateRandomColor(review._id) }}>
-                            {String(review.reviewer.name).charAt(0)}
+                            {String(review?.reviewer?.name).charAt(0)}
                           </Avatar>
                           <ReviewDetails>
-                            <Typography variant="h6">{review.reviewer.name}</Typography>
+                            <Typography variant="h6">{review?.reviewer?.name}</Typography>
                             <div style={{ display: 'flex', alignItems: 'center', marginBottom: '1rem' }}>
 
                               <Typography variant="body2">
-                                {timeAgo(review.date)}
+                                {timeAgo(review?.date)}
                               </Typography>
                             </div>
-                            <Typography variant="subtitle1">Rating: {review.rating}</Typography>
-                            <Typography variant="body1">{review.comment}</Typography>
+                            <Typography variant="subtitle1">Rating: {review?.rating}</Typography>
+                            <Typography variant="body1">{review?.comment}</Typography>
                           </ReviewDetails>
                           <IconButton onClick={() => deleteHandler(review._id)}
                             sx={{ width: "4rem", p: 0 }}>

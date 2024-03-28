@@ -88,18 +88,18 @@ const ViewOrder = () => {
                             :
                             <>
                                 <ProductContainer>
-                                    <ProductImage src={productDetails && productDetails.productImage} alt={productDetails && productDetails.productName} />
+                                    <ProductImage src={productDetails && productDetails?.productImage} alt={productDetails && productDetails?.productName} />
                                     <ProductInfo>
-                                        <ProductName>{productDetails && productDetails.productName}</ProductName>
+                                        <ProductName>{productDetails && productDetails?.productName}</ProductName>
                                         <PriceContainer>
-                                            <PriceCost>₹{productDetails && productDetails.price && productDetails.price.cost}</PriceCost>
+                                            <PriceCost>₹{productDetails && productDetails?.price && productDetails?.price.cost}</PriceCost>
                                             <PriceMrp>₹{productDetails && productDetails.price && productDetails.price.mrp}</PriceMrp>
-                                            <PriceDiscount>{productDetails && productDetails.price && productDetails.price.discountPercent}% off</PriceDiscount>
+                                            <PriceDiscount>{productDetails && productDetails?.price && productDetails?.price?.discountPercent}% off</PriceDiscount>
                                         </PriceContainer>
-                                        <Description>{productDetails && productDetails.description}</Description>
+                                        <Description>{productDetails && productDetails?.description}</Description>
                                         <ProductDetails>
-                                            <p>Category: {productDetails && productDetails.category}</p>
-                                            <p>Subcategory: {productDetails && productDetails.subcategory}</p>
+                                            <p>Category: {productDetails && productDetails?.category}</p>
+                                            <p>Subcategory: {productDetails && productDetails?.subcategory}</p>
                                         </ProductDetails>
                                     </ProductInfo>
                                 </ProductContainer>
@@ -130,7 +130,7 @@ const ViewOrder = () => {
                                                     variant="standard"
                                                     multiline
                                                     value={comment}
-                                                    onChange={(e) => setComment(e.target.value)}
+                                                    onChange={(e) => setComment(e?.target?.value)}
                                                     sx={{ width: "90%" }}
                                                     required
                                                 />
@@ -147,26 +147,26 @@ const ViewOrder = () => {
                                     <Typography variant="h4">Reviews</Typography>
                                 </ReviewWritingContainer>
 
-                                {productDetails.reviews && productDetails.reviews.length > 0 ? (
+                                {productDetails?.reviews && productDetails?.reviews?.length > 0 ? (
                                     <ReviewContainer>
-                                        {productDetails.reviews.map((review, index) => (
+                                        {productDetails?.reviews.map((review, index) => (
                                             <ReviewCard key={index}>
                                                 <ReviewCardDivision>
                                                     <Avatar sx={{ width: "60px", height: "60px", marginRight: "1rem", backgroundColor: generateRandomColor(review._id) }}>
-                                                        {String(review.reviewer.name).charAt(0)}
+                                                        {String(review?.reviewer?.name).charAt(0)}
                                                     </Avatar>
                                                     <ReviewDetails>
-                                                        <Typography variant="h6">{review.reviewer.name}</Typography>
+                                                        <Typography variant="h6">{review?.reviewer?.name}</Typography>
                                                         <div style={{ display: 'flex', alignItems: 'center', marginBottom: '1rem' }}>
 
                                                             <Typography variant="body2">
-                                                                {timeAgo(review.date)}
+                                                                {timeAgo(review?.date)}
                                                             </Typography>
                                                         </div>
-                                                        <Typography variant="subtitle1">Rating: {review.rating}</Typography>
-                                                        <Typography variant="body1">{review.comment}</Typography>
+                                                        <Typography variant="subtitle1">Rating: {review?.rating}</Typography>
+                                                        <Typography variant="body1">{review?.comment}</Typography>
                                                     </ReviewDetails>
-                                                    {review.reviewer._id === reviewer &&
+                                                    {review?.reviewer?._id === reviewer &&
                                                         <>
                                                             <IconButton onClick={handleOpenMenu} sx={{ width: "4rem", color: 'inherit', p: 0 }}>
                                                                 <MoreVert sx={{ fontSize: "2rem" }} />
@@ -193,7 +193,7 @@ const ViewOrder = () => {
                                                                     <Typography textAlign="center">Edit</Typography>
                                                                 </MenuItem>
                                                                 <MenuItem onClick={() => {
-                                                                    deleteHandler(review._id)
+                                                                    deleteHandler(review?._id)
                                                                     handleCloseMenu()
                                                                 }}>
                                                                     <Typography textAlign="center">Delete</Typography>

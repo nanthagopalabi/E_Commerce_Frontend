@@ -1,5 +1,4 @@
-import * as React from 'react';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Grid, Box, Typography, Paper, Checkbox, FormControlLabel, TextField, CssBaseline, IconButton, InputAdornment, CircularProgress } from '@mui/material';
@@ -8,26 +7,26 @@ import { LightPurpleButton } from '../utils/buttonStyles';
 import { authUser } from '../redux/userHandle';
 import styled from 'styled-components';
 import Popup from '../components/Popup';
-import { Button } from 'react-scroll';
 
 const AuthenticationPage = ({ mode, role }) => {
-
     const bgpic = "https://static.vecteezy.com/system/resources/previews/018/841/567/original/local-post-office-2d-isolated-illustration-female-consumer-picking-up-parcel-from-employee-flat-characters-on-cartoon-background-colorful-editable-scene-for-mobile-website-presentation-vector.jpg"
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    const { status, currentUser, response, error, currentRole } = useSelector(state => state.user);;
+    const { status, response } = useSelector(state => state?.user);
 
     const [toggle, setToggle] = useState(false)
     const [loader, setLoader] = useState(false)
     const [showPopup, setShowPopup] = useState(false);
     const [message, setMessage] = useState("");
 
-    const [emailError, setEmailError] = useState(false);
-    const [passwordError, setPasswordError] = useState(false);
-    const [userNameError, setUserNameError] = useState(false);
-    const [shopNameError, setShopNameError] = useState(false);
+    const [formErrors, setFormErrors] = useState({
+        email: false,
+        password: false,
+        userName: false,
+        shopName: false
+    });
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -36,8 +35,11 @@ const AuthenticationPage = ({ mode, role }) => {
         const password = event?.target?.password?.value;
 
         if (!email || !password) {
-            if (!email) setEmailError(true);
-            if (!password) setPasswordError(true);
+            setFormErrors(prevState => ({
+                ...prevState,
+                email: !email,
+                password: !password
+            }));
             return;
         }
 
@@ -45,7 +47,10 @@ const AuthenticationPage = ({ mode, role }) => {
             const name = event?.target?.userName?.value;
 
             if (!name) {
-                if (!name) setUserNameError(true);
+                setFormErrors(prevState => ({
+                    ...prevState,
+                    userName: !name
+                }));
                 return;
             }
 
@@ -53,7 +58,10 @@ const AuthenticationPage = ({ mode, role }) => {
                 const shopName = event?.target?.shopName?.value;
 
                 if (!shopName) {
-                    if (!shopName) setShopNameError(true);
+                    setFormErrors(prevState => ({
+                        ...prevState,
+                        shopName: !shopName
+                    }));
                     return;
                 }
 
@@ -72,45 +80,45 @@ const AuthenticationPage = ({ mode, role }) => {
         setLoader(true)
     };
 
+    const handleDemo = async (event) => {
+        event.preventDefault();
+        const email = "welcum2nantha@gmail.com";
+        const password = "12345678";
+        const fields = { email, password };
+
+        try {
+            setLoader(true);
+            await dispatch(authUser({ email, password }, role, mode));
+        } catch (error) {
+            setMessage("Demo login failed. Please try again.");
+            setShowPopup(true);
+        } finally {
+            setLoader(false);
+        }
+    };
+
     const handleInputChange = (event) => {
         const { name } = event?.target;
-        if (name === 'email') setEmailError(false);
-        if (name === 'password') setPasswordError(false);
-        if (name === 'userName') setUserNameError(false);
-        if (name === 'shopName') setShopNameError(false);
+        setFormErrors(prevState => ({
+            ...prevState,
+            [name]: false
+        }));
     };
 
     useEffect(() => {
-        if (status === 'success' && currentRole !== null) {
+        if (status === 'success') {
             navigate('/');
-            setLoader(false);
-        }
-        else if (status === 'failed') {
+        } else if (status === 'failed') {
             setMessage(response);
             setShowPopup(true);
             setLoader(false);
         }
-        else if (status === 'error') {
-            setLoader(false);
-            setMessage("Network Error")
-            setShowPopup(true)
-        }
-    }, [status, currentUser, currentRole, navigate, error, response]);
-
-
-    const handleDemo=(event)=>{
-        // event.preventDefault();
-        const email="welcum2nantha@gmail.com"
-        const password="12345678"
-        const fields = { email, password }
-        dispatch(authUser(fields, role, mode))
-    }
+    }, [status, navigate, response]);
 
     return (
         <>
             <Grid container component="main" sx={{ height: '100vh' }}>
                 <CssBaseline />
-
                 <Grid
                     item
                     xs={false}
@@ -120,7 +128,7 @@ const AuthenticationPage = ({ mode, role }) => {
                         backgroundImage: `url(${bgpic})`,
                         backgroundRepeat: 'no-repeat',
                         backgroundColor: (t) =>
-                            t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
+                           t?.palette?.mode === 'light' ? t?.palette?.grey[50] : t?.palette?.grey[900],
                         backgroundSize: 'cover',
                         backgroundPosition: 'center',
                     }}
@@ -140,56 +148,60 @@ const AuthenticationPage = ({ mode, role }) => {
                         </StyledTypography>
 
                         {role === "Seller" && mode === "Register" &&
-                            <Typography variant="h7">
-                                Create your own shop by registering as an seller.
+                            <Typography variant="body1">
+                                Create your own shop by registering as a seller.
                                 <br />
                                 You will be able to add products and sell them.
                             </Typography>
                         }
 
                         {role === "Customer" && mode === "Register" &&
-                            <Typography variant="h7">
-                                Register now to explore and buy products.
+                            <Typography variant="body1">
+                                Register now <br />
+                                to explore and buy products.
                             </Typography>
                         }
 
                         {mode === "Login" &&
-                            <Typography variant="h7">
-                                Welcome back! Please enter your details
+                            <Typography variant="body1">
+                                Welcome back!<br />
+                                Please enter your details
                             </Typography>
                         }
 
                         <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 2 }}>
                             {mode === "Register" &&
-                                <TextField
-                                    margin="normal"
-                                    required
-                                    fullWidth
-                                    id="userName"
-                                    label="Enter your name"
-                                    name="userName"
-                                    autoComplete="name"
-                                    autoFocus
-                                    variant="standard"
-                                    error={userNameError}
-                                    helperText={userNameError && 'Name is required'}
-                                    onChange={handleInputChange}
-                                />
-                            }
-                            {mode === "Register" && role === "Seller" &&
-                                <TextField
-                                    margin="normal"
-                                    required
-                                    fullWidth
-                                    id="shopName"
-                                    label="Create your shop name"
-                                    name="shopName"
-                                    autoComplete="off"
-                                    variant="standard"
-                                    error={shopNameError}
-                                    helperText={shopNameError && 'Shop name is required'}
-                                    onChange={handleInputChange}
-                                />
+                                <>
+                                    <TextField
+                                        margin="normal"
+                                        required
+                                        fullWidth
+                                        id="userName"
+                                        label="Enter your name"
+                                        name="userName"
+                                        autoComplete="name"
+                                        autoFocus
+                                        variant="standard"
+                                        error={formErrors.userName}
+                                        helperText={formErrors.userName && 'Name is required'}
+                                        onChange={handleInputChange}
+                                    />
+                                    {role === "Seller" &&
+                                        <TextField
+                                            margin="normal"
+                                            required
+                                            fullWidth
+                                            id="shopName"
+                                            label="Create your shop name"
+                                            name="shopName"
+                                            autoComplete="off"
+                                            variant="standard"
+                                            error={formErrors.shopName}
+                                            helperText={formErrors.shopName && 'Shop name is required'}
+                                            onChange={handleInputChange}
+                                        />
+                                    }
+                                </>
                             }
                             <TextField
                                 margin="normal"
@@ -200,22 +212,22 @@ const AuthenticationPage = ({ mode, role }) => {
                                 name="email"
                                 autoComplete="email"
                                 variant="standard"
-                                error={emailError}
-                                helperText={emailError && 'Email is required'}
+                                error={formErrors.email}
+                                helperText={formErrors.email && 'Email is required'}
                                 onChange={handleInputChange}
                             />
                             <TextField
                                 margin="normal"
                                 required
                                 fullWidth
+                                id="password"
                                 name="password"
                                 label="Password"
                                 type={toggle ? 'text' : 'password'}
-                                id="password"
                                 autoComplete="current-password"
                                 variant="standard"
-                                error={passwordError}
-                                helperText={passwordError && 'Password is required'}
+                                error={formErrors.password}
+                                helperText={formErrors.password && 'Password is required'}
                                 onChange={handleInputChange}
                                 InputProps={{
                                     endAdornment: (
@@ -231,19 +243,17 @@ const AuthenticationPage = ({ mode, role }) => {
                                     ),
                                 }}
                             />
-                            <Grid container sx={{ display: "flex", justifyContent: "space-between" }}>
-                                <FormControlLabel
-                                    control={<Checkbox value="remember" color="primary" />}
-                                    label="Remember me"
-                                />
-                            </Grid>
+                            <FormControlLabel
+                                control={<Checkbox value="remember" color="primary" />}
+                                label="Remember me"
+                            />
                             <LightPurpleButton
                                 type="submit"
                                 fullWidth
                                 variant="contained"
                                 sx={{ mt: 3, mb: 2 }}
                             >
-                                {loader ? <CircularProgress size={24} color="inherit" /> : mode}
+                                {loader ? <CircularProgress size={24} color="primary" /> : mode}
                             </LightPurpleButton>
                             <LightPurpleButton
                                 type="click"
@@ -251,10 +261,9 @@ const AuthenticationPage = ({ mode, role }) => {
                                 variant="contained"
                                 sx={{ mt: 3, mb: 2 }}
                                 onClick={handleDemo}
-                            >demo &nbsp;
-                                {loader ? <CircularProgress size={24} color="blue" /> : mode}
+                            >
+                                {loader ? <CircularProgress size={24} color="primary" /> : "Demo"}
                             </LightPurpleButton>
-                           
                             <Grid container>
                                 <Grid>
                                     {mode === "Register" ?
@@ -264,33 +273,26 @@ const AuthenticationPage = ({ mode, role }) => {
                                     }
                                 </Grid>
                                 <Grid item sx={{ ml: 2 }}>
-                                    {mode === "Register" ?
-                                        <StyledLink to={`/${role}login`}>
-                                            Log in
-                                        </StyledLink>
-                                        :
-                                        <StyledLink to={`/${role}register`}>
-                                            Sign up
-                                        </StyledLink>
-                                    }
+                                    <StyledLink to={mode === "Register" ? `/${role}login` : `/${role}register`}>
+                                        {mode === "Register" ? "Log in" : "Sign up"}
+                                    </StyledLink>
                                 </Grid>
                             </Grid>
                         </Box>
                     </Box>
                 </Grid>
-                
             </Grid>
             <Popup message={message} setShowPopup={setShowPopup} showPopup={showPopup} />
         </>
     );
 }
 
-export default AuthenticationPage
+export default AuthenticationPage;
 
 const StyledLink = styled(Link)`
-  margin-top: 9px;
-  text-decoration: none;
-  color: #7f56da;
+    margin-top: 9px;
+    text-decoration: none;
+    color: #7f56da;
 `;
 
 const StyledTypography = styled.h4`

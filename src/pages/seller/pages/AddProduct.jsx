@@ -11,7 +11,7 @@ const AddProduct = () => {
 
   const dispatch = useDispatch();
 
-  const { currentUser, status, response, error } = useSelector(state => state.user);
+  const { currentUser, status, response, error } = useSelector(state => state?.user);
 
   const [productName, setProductName] = useState("");
   const [mrp, setMrp] = useState("");
@@ -108,7 +108,7 @@ const AddProduct = () => {
                   fullWidth
                   label="Product Image URL"
                   value={productImage}
-                  onChange={(event) => setProductImage(event.target.value)}
+                  onChange={(event) => setProductImage(event?.target?.value)}
                   required
                   InputLabelProps={{
                     shrink: true,
@@ -118,7 +118,7 @@ const AddProduct = () => {
                   fullWidth
                   label="Product Name"
                   value={productName}
-                  onChange={(event) => setProductName(event.target.value)}
+                  onChange={(event) => setProductName(event?.target?.value)}
                   required
                   InputLabelProps={{
                     shrink: true,
@@ -129,7 +129,7 @@ const AddProduct = () => {
                   multiline
                   label="Description"
                   value={description}
-                  onChange={(event) => setDescription(event.target.value)}
+                  onChange={(event) => setDescription(event?.target?.value)}
                   required
                   InputLabelProps={{
                     shrink: true,
@@ -139,7 +139,7 @@ const AddProduct = () => {
                   fullWidth
                   label="MRP"
                   value={mrp}
-                  onChange={(event) => setMrp(event.target.value)}
+                  onChange={(event) => setMrp(event?.target?.value)}
                   required
                   InputLabelProps={{
                     shrink: true,
@@ -149,7 +149,7 @@ const AddProduct = () => {
                   fullWidth
                   label="Cost"
                   value={cost}
-                  onChange={(event) => setCost(event.target.value)}
+                  onChange={(event) => setCost(event?.target?.value)}
                   required
                   InputLabelProps={{
                     shrink: true,
@@ -159,7 +159,7 @@ const AddProduct = () => {
                   fullWidth
                   label="Discount Percent"
                   value={discountPercent}
-                  onChange={(event) => setDiscountPercent(event.target.value)}
+                  onChange={(event) => setDiscountPercent(event?.target?.value)}
                   required
                   InputLabelProps={{
                     shrink: true,
@@ -169,7 +169,7 @@ const AddProduct = () => {
                   fullWidth
                   label="Category"
                   value={category}
-                  onChange={(event) => setCategory(event.target.value)}
+                  onChange={(event) => setCategory(event?.target?.value)}
                   required
                   InputLabelProps={{
                     shrink: true,
@@ -179,7 +179,7 @@ const AddProduct = () => {
                   fullWidth
                   label="Subcategory"
                   value={subcategory}
-                  onChange={(event) => setSubcategory(event.target.value)}
+                  onChange={(event) => setSubcategory(event?.target?.value)}
                   required
                   InputLabelProps={{
                     shrink: true,
@@ -189,7 +189,7 @@ const AddProduct = () => {
                   fullWidth
                   label="Tagline"
                   value={tagline}
-                  onChange={(event) => setTagline(event.target.value)}
+                  onChange={(event) => setTagline(event?.target?.value)}
                   required
                   InputLabelProps={{
                     shrink: true,

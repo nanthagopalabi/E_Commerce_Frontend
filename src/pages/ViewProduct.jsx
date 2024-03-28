@@ -15,7 +15,7 @@ const ViewProduct = () => {
     const productID = params.id;
 
 
-    const { currentUser, currentRole, productDetails, loading, responseDetails } = useSelector(state => state.user);
+    const { currentUser, currentRole, productDetails, loading, responseDetails } = useSelector(state => state?.user);
 
     useEffect(() => {
         dispatch(getProductDetails(productID));
@@ -25,7 +25,7 @@ const ViewProduct = () => {
     const [anchorElMenu, setAnchorElMenu] = useState(null);
 
     const handleOpenMenu = (event) => {
-        setAnchorElMenu(event.currentTarget);
+        setAnchorElMenu(event?.currentTarget);
     };
 
     const handleCloseMenu = () => {
@@ -84,26 +84,26 @@ const ViewProduct = () => {
                                     <Typography variant="h4">Reviews</Typography>
                                 </ReviewWritingContainer>
 
-                                {productDetails.reviews && productDetails.reviews.length > 0 ? (
+                                {productDetails?.reviews && productDetails?.reviews?.length > 0 ? (
                                     <ReviewContainer>
-                                        {productDetails.reviews.map((review, index) => (
+                                        {productDetails?.reviews.map((review, index) => (
                                             <ReviewCard key={index}>
                                                 <ReviewCardDivision>
                                                     <Avatar sx={{ width: "60px", height: "60px", marginRight: "1rem", backgroundColor: generateRandomColor(review._id) }}>
-                                                        {String(review.reviewer.name).charAt(0)}
+                                                        {String(review?.reviewer?.name).charAt(0)}
                                                     </Avatar>
                                                     <ReviewDetails>
-                                                        <Typography variant="h6">{review.reviewer.name}</Typography>
+                                                        <Typography variant="h6">{review?.reviewer?.name}</Typography>
                                                         <div style={{ display: 'flex', alignItems: 'center', marginBottom: '1rem' }}>
 
                                                             <Typography variant="body2">
-                                                                {timeAgo(review.date)}
+                                                                {timeAgo(review?.date)}
                                                             </Typography>
                                                         </div>
-                                                        <Typography variant="subtitle1">Rating: {review.rating}</Typography>
-                                                        <Typography variant="body1">{review.comment}</Typography>
+                                                        <Typography variant="subtitle1">Rating: {review?.rating}</Typography>
+                                                        <Typography variant="body1">{review?.comment}</Typography>
                                                     </ReviewDetails>
-                                                    {review.reviewer._id === reviewer &&
+                                                    {review?.reviewer._id === reviewer &&
                                                         <>
                                                             <IconButton onClick={handleOpenMenu} sx={{ width: "4rem", color: 'inherit', p: 0 }}>
                                                                 <MoreVert sx={{ fontSize: "2rem" }} />

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Avatar, Menu, MenuItem, ListItemIcon, Divider, IconButton, Tooltip } from '@mui/material';
+import { Box, Avatar, Menu, MenuItem, ListItemIcon, Divider, IconButton, Tooltip, Paper } from '@mui/material';
 import { Logout } from '@mui/icons-material';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -9,16 +9,18 @@ const AccountMenu = () => {
 
     const open = Boolean(anchorEl);
 
-    const { currentUser } = useSelector(state => state.user);
+    const { currentUser } = useSelector(state => state?.user);
 
     const navigate = useNavigate();
 
     const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
+        setAnchorEl(event?.currentTarget);
     };
+
     const handleClose = () => {
         setAnchorEl(null);
     };
+
     return (
         <>
             <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
@@ -43,12 +45,11 @@ const AccountMenu = () => {
                 open={open}
                 onClose={handleClose}
                 onClick={handleClose}
-                PaperProps={{
-                    elevation: 0,
-                    sx: styles.styledPaper,
-                }}
-                transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-                anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+                papercomponent={Paper}
+                elevation={0}
+                sx={styles?.styledPaper}
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+                transformOrigin={{ vertical: 'top', horizontal: 'right' }}
             >
                 <MenuItem onClick={() => navigate("/Profile")}>
                     <Avatar />

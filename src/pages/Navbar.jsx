@@ -16,15 +16,12 @@ import { Login, Logout, Shop2, Store } from '@mui/icons-material';
 import { Link, useNavigate } from 'react-router-dom';
 import { Avatar, Badge, Divider, Drawer, ListItemIcon } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-// import { styled } from '@mui/system';
+import styled from "styled-components";
 import { NavLogo } from '../utils/styles';
 import Cart from './customer/components/Cart';
 import Search from './customer/components/Search';
 import ProductsMenu from './customer/components/ProductsMenu';
 import { updateCustomer } from '../redux/userHandle';
-import styled from 'styled-components';
-import { Paper } from '@mui/material';
-
 
 const Navbar = () => {
     const { currentUser, currentRole } = useSelector(state => state.user);
@@ -64,9 +61,9 @@ const Navbar = () => {
         setAnchorElNav(event?.currentTarget);
     };
 
-    // const handleCloseNavMenu = () => {
-    //     setAnchorElNav(null);
-    // };
+    const handleCloseNavMenu = () => {
+        setAnchorElNav(null);
+    };
 
     // User Menu
     const handleOpenUserMenu = (event) => {
@@ -87,8 +84,41 @@ const Navbar = () => {
     };
 
     const homeHandler = () => {
-        navigate("/Home")
+        navigate("/")
     };
+
+    // Define your custom paper component
+    const CustomPaperComponent = React.forwardRef(function CustomPaperComponent(props, ref) {
+        return (
+            <Box
+                ref={ref}
+                sx={{
+                    overflow: 'visible',
+                    filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+                    mt: 1.5,
+                    '& .MuiAvatar-root': {
+                        width: 32,
+                        height: 32,
+                        ml: -0.5,
+                        mr: 1,
+                    },
+                    '&:before': {
+                        content: '""',
+                        display: 'block',
+                        position: 'absolute',
+                        top: 0,
+                        right: 14,
+                        width: 10,
+                        height: 10,
+                        bgcolor: 'background.paper',
+                        transform: 'translateY(-50%) rotate(45deg)',
+                        zIndex: 0,
+                    },
+                }}
+                {...props}
+            />
+        );
+    });
 
     return (
         <AppBar position="sticky">
@@ -153,29 +183,35 @@ const Navbar = () => {
                                     <Login />
                                 </IconButton>
                                 <Menu
-                                    anchorEl={anchorElSign}
                                     id="menu-appbar"
-                                    open={openSign}
-                                    onClose={handleCloseSigninMenu}
-                                    onClick={handleCloseSigninMenu}
-                                    PaperComponent={StyledPaper} // Use PaperComponent instead of PaperProps
-                                    transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-                                    anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+                                    anchorEl={anchorElNav}
+                                    anchorOrigin={{
+                                        vertical: 'bottom',
+                                        horizontal: 'left',
+                                    }}
+                                    keepMounted
+                                    transformOrigin={{
+                                        vertical: 'top',
+                                        horizontal: 'left',
+                                    }}
+                                    open={Boolean(anchorElNav)}
+                                    onClose={handleCloseNavMenu}
+                                    onClick={handleCloseUserMenu}
+                                    sx={{
+                                        display: { xs: 'block', md: 'none' },
+                                    }}
                                 >
-                                    <MenuItem onClick={() => navigate("/Customerlogin")}>
-                                        <Avatar />
-                                        <Link to="/Customerlogin">
-                                            Sign in as customer
-                                        </Link>
+                                    <MenuItem onClick={() => {
+                                        navigate("/Customerlogin")
+                                        handleCloseNavMenu()
+                                    }}>
+                                        <Typography textAlign="center">Sign in as customer</Typography>
                                     </MenuItem>
-                                    <Divider />
-                                    <MenuItem onClick={() => navigate("/Sellerlogin")}>
-                                        <ListItemIcon>
-                                            <Store fontSize="small" />
-                                        </ListItemIcon>
-                                        <Link to="/Sellerlogin">
-                                            Sign in as seller
-                                        </Link>
+                                    <MenuItem onClick={() => {
+                                        navigate("/Sellerlogin")
+                                        handleCloseNavMenu()
+                                    }}>
+                                        <Typography textAlign="center">Sign in as seller</Typography>
                                     </MenuItem>
                                 </Menu>
                             </>
@@ -214,16 +250,14 @@ const Navbar = () => {
                         </Typography>
                     </HomeContainer>
 
-                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' },
-                    
-                     }}>
-                        <Search  />
+                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+                        <Search />
                         <ProductsMenu dropName="Categories" />
                         <ProductsMenu dropName="Products" />
                     </Box>
 
                     {currentRole === null &&
-                        <Box sx={{ flexGrow: 0, display: { xs: 'none', md: 'flex' }, }}>
+                        <Box sx={{ flexGrow: 0, display: { xs: 'none', md: 'flex' } }}>
                             <Button
                                 onClick={handleOpenSigninMenu}
                                 sx={{ my: 2, color: 'white', display: 'block' }}
@@ -236,11 +270,10 @@ const Navbar = () => {
                                 open={openSign}
                                 onClose={handleCloseSigninMenu}
                                 onClick={handleCloseSigninMenu}
-                                PaperComponent={StyledPaper} // Use PaperComponent instead of PaperProps
+                                papercomponent={CustomPaperComponent} // Using PaperComponent instead of PaperProps
                                 transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
-                                >
-
+                            >
                                 <MenuItem onClick={() => navigate("/Customerlogin")}>
                                     <Avatar />
                                     <Link to="/Customerlogin">
@@ -281,20 +314,20 @@ const Navbar = () => {
                                     aria-expanded={open ? 'true' : undefined}
                                 >
                                     <Avatar sx={{ width: 32, height: 32, backgroundColor: "#8970dc" }}>
-                                        {String(currentUser.name).charAt(0)}
+                                        {String(currentUser?.name).charAt(0)}
                                     </Avatar>
                                 </IconButton>
                             </Tooltip>
-                           <Menu
+                            <Menu
                                 anchorEl={anchorElUser}
                                 id="menu-appbar"
                                 open={open}
                                 onClose={handleCloseUserMenu}
                                 onClick={handleCloseUserMenu}
-                                PaperComponent={StyledPaper} // Use PaperComponent instead of PaperProps
+                                papercomponent={CustomPaperComponent} // Using PaperComponent instead of PaperProps
                                 transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
-                                >
+                            >
                                 <MenuItem onClick={() => navigate("/Profile")}>
                                     <Avatar />
                                     <Link to="/Profile">
@@ -325,14 +358,12 @@ const Navbar = () => {
                 </Toolbar>
             </Container>
 
-            {
-                isCartOpen &&
+            {isCartOpen &&
                 <Drawer
                     anchor="right"
                     open={isCartOpen}
                     onClose={handleCloseCart}
-                    onClick={()=>navigate("/cart")}
-                   
+                    onClick={() => navigate("/cart")}
                     sx={{
                         width: '400px',
                         flexShrink: 0,
@@ -345,36 +376,13 @@ const Navbar = () => {
                     <Cart setIsCartOpen={setIsCartOpen} />
                 </Drawer>
             }
-        </AppBar >
+        </AppBar>
     );
 }
+
 export default Navbar;
 
 const HomeContainer = styled.div`
   display: flex;
   cursor: pointer;
 `;
-
-const StyledPaper = styled(Paper)({
-    overflow: 'visible',
-    filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
-    marginTop: 1.5,
-    '& .MuiAvatar-root': {
-        width: 32,
-        height: 32,
-        marginLeft: -0.5,
-        marginRight: 1,
-    },
-    '&:before': {
-        content: '""',
-        display: 'block',
-        position: 'absolute',
-        top: 0,
-        right: 14,
-        width: 10,
-        height: 10,
-        backgroundColor: 'background.paper', // Note: 'bgcolor' should be 'backgroundColor'
-        transform: 'translateY(-50%) rotate(45deg)',
-        zIndex: 0,
-    },
-});

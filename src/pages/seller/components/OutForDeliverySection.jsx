@@ -10,7 +10,7 @@ const OutForDeliverySection = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch();
 
-    const { currentUser, specificProductData, responseSpecificProducts } = useSelector(state => state.user);
+    const { currentUser, specificProductData, responseSpecificProducts } = useSelector(state => state?.user);
 
     useEffect(() => {
         dispatch(getSpecificProducts(currentUser._id, "getOrderedProductsBySeller"));
@@ -23,14 +23,14 @@ const OutForDeliverySection = () => {
         { id: 'subcategory', label: 'Product SubCategory', minWidth: 100 },
     ]
 
-    const productsRows = Array.isArray(specificProductData) && specificProductData.length > 0
+    const productsRows = Array.isArray(specificProductData) && specificProductData?.length > 0
         ? specificProductData.map((product) => ({
-            name: product.productName,
-            quantity: product.quantity,
-            category: product.category,
-            subcategory: product.subcategory,
-            id: product.productName,
-            productID: product._id,
+            name: product?.productName,
+            quantity: product?.quantity,
+            category: product?.category,
+            subcategory: product?.subcategory,
+            id: product?.productName,
+            productID: product?._id,
         }))
         : [];
 

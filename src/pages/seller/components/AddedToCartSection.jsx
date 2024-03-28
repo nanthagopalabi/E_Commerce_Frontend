@@ -23,14 +23,14 @@ const AddedToCartSection = () => {
         { id: 'subcategory', label: 'Product SubCategory', minWidth: 100 },
     ]
 
-    const productsRows = Array.isArray(specificProductData) && specificProductData.length > 0
+    const productsRows = Array.isArray(specificProductData) && specificProductData?.length > 0
         ? specificProductData.map((product) => ({
-            name: product.productName,
-            quantity: product.quantity,
-            category: product.category,
-            subcategory: product.subcategory,
-            id: product.productName,
-            productID: product.productID,
+            name: product?.productName,
+            quantity: product?.quantity,
+            category: product?.category,
+            subcategory: product?.subcategory,
+            id: product?.productName,
+            productID: product?.productID,
         }))
         : [];
 

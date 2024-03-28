@@ -26,7 +26,7 @@ const SellerDashboard = () => {
         setOpen(!open);
     };
 
-    const { currentRole } = useSelector(state => state.user);
+    const { currentRole } = useSelector(state => state?.user);
 
     const navigate = useNavigate()
 
@@ -82,7 +82,7 @@ const SellerDashboard = () => {
                             >
                                 <LocalMallIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
 
-                                E-cart
+                                SmartCart
                             </NavLogo>
                         </Typography>
 
@@ -113,7 +113,7 @@ const SellerDashboard = () => {
                             >
                                 <LocalMallIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
 
-                                E-cart
+                                SmartCart
                             </NavLogo>
                         </Typography>
 
@@ -121,7 +121,7 @@ const SellerDashboard = () => {
                     </Toolbar>
                 </AppBar>
                 <Drawer variant="permanent" open={open} sx={open ? styles.drawerStyled : styles.hideDrawer}>
-                    <Toolbar sx={styles.toolBarStyled}>
+                    <Toolbar sx={styles?.toolBarStyled}>
                         <IconButton onClick={toggleDrawer}>
                             <CloseIcon />
                         </IconButton>
@@ -131,7 +131,7 @@ const SellerDashboard = () => {
                         <SideBar />
                     </List>
                 </Drawer>
-                <Box component="main" sx={styles.boxStyled}>
+                <Box component="main" sx={styles?.boxStyled}>
                     <Toolbar />
                     <Routes>
                         <Route path="/" element={<SellerHomePage />} />
@@ -169,9 +169,9 @@ export default SellerDashboard
 const styles = {
     boxStyled: {
         backgroundColor: (theme) =>
-            theme.palette.mode === 'light'
-                ? theme.palette.grey[100]
-                : theme.palette.grey[900],
+            theme?.palette?.mode === 'light'
+                ? theme?.palette?.grey[100]
+                : theme?.palette?.grey[900],
         flexGrow: 1,
         height: '100vh',
         overflow: 'auto',

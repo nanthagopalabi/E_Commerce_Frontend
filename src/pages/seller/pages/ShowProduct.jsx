@@ -16,7 +16,7 @@ const ShowProducts = () => {
 
   const navigate = useNavigate();
 
-  const { currentUser, currentRole, loading, sellerProductData, responseSellerProducts } = useSelector(state => state.user);
+  const { currentUser, currentRole, loading, sellerProductData, responseSellerProducts } = useSelector(state => state?.user);
 
   const sellerID = currentUser._id
 
@@ -24,7 +24,7 @@ const ShowProducts = () => {
   const [showDialog, setShowDialog] = useState(false);
 
   useEffect(() => {
-    dispatch(getProductsbySeller(currentUser._id));
+    dispatch(getProductsbySeller(currentUser?._id));
   }, [dispatch, currentUser._id])
 
   const deleteHandler = (deleteID, address) => {
@@ -92,18 +92,18 @@ const ShowProducts = () => {
               </Box>
               :
               <>
-                {Array.isArray(sellerProductData) && sellerProductData.length > 0 &&
+                {Array.isArray(sellerProductData) && sellerProductData?.length > 0 &&
                   <ProductGrid container spacing={3}>
                     {sellerProductData.map((data, index) => (
                       <Grid item xs={12} sm={6} md={4}
                         key={index}
                       >
                         <ProductContainer>
-                          <ProductImage src={data.productImage} />
-                          <ProductName>{data.productName}</ProductName>
-                          <PriceMrp>{data.price.mrp}</PriceMrp>
-                          <PriceCost>₹{data.price.cost}</PriceCost>
-                          <PriceDiscount>{data.price.discountPercent}% off</PriceDiscount>
+                          <ProductImage src={data?.productImage} />
+                          <ProductName>{data?.productName}</ProductName>
+                          <PriceMrp>{data?.price?.mrp}</PriceMrp>
+                          <PriceCost>₹{data?.price?.cost}</PriceCost>
+                          <PriceDiscount>{data?.price?.discountPercent}% off</PriceDiscount>
                           <ButtonContainer>
                             <DarkRedButton
                               onClick={() => deleteHandler(data._id, "DeleteProduct")}

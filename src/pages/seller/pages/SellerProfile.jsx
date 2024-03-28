@@ -11,17 +11,17 @@ const SellerProfile = () => {
       <ProfileHeader elevation={3}>
         <ProfileAvatar>
           <h1>
-            {currentUser ? currentUser.name[0].toUpperCase() : ''}
+            {currentUser ? currentUser?.name[0].toUpperCase() : ''}
           </h1>
         </ProfileAvatar>
         <ProfileName variant="h4">
-          {currentUser ? currentUser.name : ''}
+          {currentUser ? currentUser?.name : ''}
         </ProfileName>
         <ProfileText variant="h6">
-          Email : {currentUser ? currentUser.email : ''}
+          Email : {currentUser ? currentUser?.email : ''}
         </ProfileText>
         <ProfileText variant="h6">
-          Role : {currentUser ? currentUser.role : ''}
+          Role : {currentUser ? currentUser?.role : ''}
         </ProfileText>
       </ProfileHeader>
     </ProfileContainer>

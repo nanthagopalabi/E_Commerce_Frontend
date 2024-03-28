@@ -15,18 +15,18 @@ const ShowCustomers = () => {
         dispatch(getCustomers(customerID, "getInterestedCustomers"));
     }, [customerID, dispatch]);
 
-    const { loading, customersList, responseCustomersList } = useSelector(state => state.user);
+    const { loading, customersList, responseCustomersList } = useSelector(state => state?.user);
     
     const customersColumns = [
         { id: 'name', label: 'Customer Name', minWidth: 170 },
         { id: 'quantity', label: 'Product Quantity', minWidth: 100 },
     ]
 
-    const customersRows = Array.isArray(customersList) && customersList.length > 0
+    const customersRows = Array.isArray(customersList) && customersList?.length > 0
         ? customersList.map((customer) => ({
-            name: customer.customerName,
-            quantity: customer.quantity,
-            id: customer.customerID,
+            name: customer?.customerName,
+            quantity: customer?.quantity,
+            id: customer?.customerID,
         }))
         : [];
 
